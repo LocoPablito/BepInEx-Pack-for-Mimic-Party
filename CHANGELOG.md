@@ -1,6 +1,6 @@
 # Changelog
 
-## Packaging revision R2 — 11 September 2026
+## Packaging revision R3 — 11 September 2026
 
 - Establishes the dedicated BepInEx-Pack-for-Mimic-Party repository.
 - Links the Pack, Core and Expansion Nexus pages.

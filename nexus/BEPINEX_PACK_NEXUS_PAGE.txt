@@ -15,7 +15,7 @@ Install [url=https://www.nexusmods.com/mimicparty/mods/2]Modding Core[/url] sepa
 3. Install the Core when required by your chosen mod, then the feature mod.
 4. Launch normally through Steam. Initial interop generation may download upstream reference libraries; allow it to finish.
 
-Do not overwrite a different loader, unrelated winhttp.dll or customized BepInEx.cfg without backing it up outside the game folder. Existing users of the same pinned loader can retain their configuration. Working interop files do not need regeneration merely for R2.
+Do not overwrite a different loader, unrelated winhttp.dll or customized BepInEx.cfg without backing it up outside the game folder. Existing users of the same pinned loader can retain their configuration. Working interop files do not need regeneration merely for R3.
 
 The Pack provides BepInEx/patchers/MimicParty.InteropBootstrap.dll. Older Core/Complete packages contain the same file at the same path. Keep one copy; never add renamed duplicates or remove it while using this loader setup.
 
@@ -33,7 +33,7 @@ Close the game. Set enabled = false in [General] of doorstop_config.ini to disab
 [size=4][b]Sources, licenses and support[/b][/size]
 The SOURCES download is for reviewing/rebuilding components, not game installation. Keep it available alongside the runtime ZIP. BepInEx/UnityDoorstop LGPL, Il2CppInterop LGPL/GPL and other upstream rights and credits remain intact; arribbaa does not claim authorship of those projects.
 
-R2 moves the Pack to its own repository and refreshes documentation without changing runtime files or the preset.
+R3 moves the Pack to its own repository and refreshes documentation without changing runtime files or the preset.
 [url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party]Pack source and releases[/url]
 [url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/issues]Report an issue[/url]
 Use sanitized log excerpts, not private archives or game binaries. Do not disable security protection to install this pack. Unofficial community distribution; no endorsement is implied.

@@ -10,4 +10,4 @@ Metadata SHA-256:
 
 All 228 pinned upstream files remain byte-for-byte unchanged. The included bootstrap has metadata/load and regression verification. A fresh Windows game launch using this automatic setup is not yet confirmed.
 
-The pack does not certify third-party feature mods or future builds. It retains upstream's embedded .NET 6.0.7 and is not a long-term-support or security guarantee. No runtime upgrade is silently substituted. Existing working installations need no cache regeneration for R2.
+The pack does not certify third-party feature mods or future builds. It retains upstream's embedded .NET 6.0.7 and is not a long-term-support or security guarantee. No runtime upgrade is silently substituted. Existing working installations need no cache regeneration for R3.

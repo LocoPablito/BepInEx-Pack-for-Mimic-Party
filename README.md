@@ -29,7 +29,7 @@ The console is hidden by default; the disk log is `BepInEx/LogOutput.log`. To sh
 
 The bootstrap checks the captured game fingerprints, repairs the recognized duplicate empty helper names in the **locally generated** CoreModule, and keeps an original backup. It skips an already-valid file. No Unity/game-generated assembly is included in this distribution.
 
-**A fresh Windows game launch of the automatic Pack route is not yet confirmed.** Package byte verification and bootstrap metadata checks do not establish that route. See [Compatibility](COMPATIBILITY.md).
+**A fresh Windows game launch of the automatic Pack route is not yet confirmed.** Package byte verification and bootstrap metadata checks do not establish that route. See [Compatibility](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/COMPATIBILITY.md).
 
 ## Remove / recover
 
@@ -39,6 +39,6 @@ Close the game. Set `enabled = false` in the `[General]` section of `doorstop_co
 
 The separate **SOURCES** ZIP is for review/rebuilding, not installation. Keep it available alongside the binary download. Upstream LGPL, MIT, Apache and other component rights are unchanged; arribbaa does not claim authorship of the upstream loader. The supplied source includes upstream material needed for rebuilding, not private game captures.
 
-This dedicated repository replaces the Pack's former location in the Core repository. Runtime bytes are unchanged in packaging revision R2.
+This dedicated repository replaces the Pack's former location in the Core repository. Runtime bytes are unchanged in packaging revision R3.
 
-[Compatibility](COMPATIBILITY.md) · [Changelog](CHANGELOG.md) · [Build instructions](BUILDING.md) · [Licenses](LICENSE.txt) · [Security](SECURITY.md)
+[Compatibility](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/COMPATIBILITY.md) · [Changelog](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/CHANGELOG.md) · [Build instructions](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/BUILDING.md) · [Licenses](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/LICENSE.txt) · [Security](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/SECURITY.md)
