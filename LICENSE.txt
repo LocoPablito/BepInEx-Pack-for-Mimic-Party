@@ -1,0 +1,14 @@
+BEPINEX PACK FOR MIMIC PARTY
+Pack configuration and maintenance: arribbaa
+
+This distribution aggregates separately licensed components. It does not claim exclusive ownership of BepInEx or its dependencies.
+
+BepInEx and UnityDoorstop retain LGPL-2.1. Il2CppInterop retains LGPL-3.0 and accompanying GPL terms. Other components retain their individual licenses and notices. Full third-party license texts and corresponding-source access are included in BepInExPack/licenses and SOURCE_ACCESS.txt in the runtime and source archives. These notices are mandatory distribution material, not removable author branding.
+
+INTEROP BOOTSTRAP
+Copyright (c) 2026 arribbaa. All rights reserved.
+Personal use with a legitimate Mimic Party installation is permitted. Third-party redistribution, rebranding, modification for redistribution and commercial reuse of this author component require prior permission from arribbaa, except as expressly permitted by applicable third-party license terms.
+
+Private modification and reverse engineering necessary to debug or relink with interface-compatible modified LGPL dependencies are permitted. No term here restricts modification, redistribution or other rights already granted by an upstream license. The official first-party Core/Expansion bundles by arribbaa are authorized distributions of the Bootstrap.
+
+THE AUTHOR COMPONENT IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND. Third-party components retain their own warranty disclaimers and credits.

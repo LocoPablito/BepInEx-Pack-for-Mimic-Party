@@ -1,0 +1,39 @@
+[size=5][b]BepInEx Pack for Mimic Party[/b][/size]
+[b]Pack 1.0.0 · configured and maintained by arribbaa[/b]
+
+Original loader: BepInEx team and contributors.
+Official BepInEx 6.0.0-be.788, Unity IL2CPP Windows x64, with the existing Interop Bootstrap 1.0.0, a hidden-console preset and disk logging. All 228 original upstream files are preserved unchanged.
+
+[size=4][b]Requirements and included files[/b][/size]
+Mimic Party Windows x64 / Steam, documented v0.1.73 build and Unity 6000.4.2f1. No separate BepInEx download is needed. The upstream embedded .NET runtime is included.
+[b]This pack does not include or require Modding Core or 10 Player Expansion.[/b]
+Install [url=https://www.nexusmods.com/mimicparty/mods/2]Modding Core[/url] separately only when your chosen feature mod needs it. The [url=https://www.nexusmods.com/mimicparty/mods/1]10 Player Expansion[/url] is one such mod, not a Pack dependency.
+
+[size=4][b]Installation[/b][/size]
+1. Close the game and use Steam > Manage > Browse local files.
+2. Extract the runtime Pack ZIP into the folder containing Mimic Party.exe. winhttp.dll, doorstop_config.ini, dotnet/ and BepInEx/ belong directly there.
+3. Install the Core when required by your chosen mod, then the feature mod.
+4. Launch normally through Steam. Initial interop generation may download upstream reference libraries; allow it to finish.
+
+Do not overwrite a different loader, unrelated winhttp.dll or customized BepInEx.cfg without backing it up outside the game folder. Existing users of the same pinned loader can retain their configuration. Working interop files do not need regeneration merely for R2.
+
+The Pack provides BepInEx/patchers/MimicParty.InteropBootstrap.dll. Older Core/Complete packages contain the same file at the same path. Keep one copy; never add renamed duplicates or remove it while using this loader setup.
+
+[size=4][b]Logging and compatibility[/b][/size]
+Console hidden by default; disk log: BepInEx/LogOutput.log. To show the console, set Enabled = true under [Logging.Console] in BepInEx/config/BepInEx.cfg and restart. Do not close a visible console while the game runs.
+
+The bootstrap checks captured game fingerprints, repairs the recognized duplicate empty helper names in the locally generated CoreModule and keeps an original backup. It leaves already-valid files unchanged. No game/Unity-generated assemblies are bundled.
+
+A fresh Windows game launch through this automatic Pack route is not yet confirmed. Package and metadata verification do not establish the full runtime route. Future builds are not automatically supported.
+[url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/COMPATIBILITY.md]Exact compatibility details[/url]
+
+[size=4][b]Remove or recover[/b][/size]
+Close the game. Set enabled = false in [General] of doorstop_config.ini to disable the loader on the next start; all mods using it are disabled. For complete removal, preserve unrelated mods/configurations and use the included manifest to identify Pack-owned files. Never delete native game files.
+
+[size=4][b]Sources, licenses and support[/b][/size]
+The SOURCES download is for reviewing/rebuilding components, not game installation. Keep it available alongside the runtime ZIP. BepInEx/UnityDoorstop LGPL, Il2CppInterop LGPL/GPL and other upstream rights and credits remain intact; arribbaa does not claim authorship of those projects.
+
+R2 moves the Pack to its own repository and refreshes documentation without changing runtime files or the preset.
+[url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party]Pack source and releases[/url]
+[url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/issues]Report an issue[/url]
+Use sanitized log excerpts, not private archives or game binaries. Do not disable security protection to install this pack. Unofficial community distribution; no endorsement is implied.

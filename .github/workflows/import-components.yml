@@ -1,0 +1,40 @@
+name: Import pinned components
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/import-components.yml']
+permissions:
+  contents: write
+  actions: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Import exact source blobs from their original repository
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.request import urlopen
+          import hashlib
+          items = {
+            'scripts/package_release.py':('37121e27e821264823fcd26334442f9415e7f883','295f645c9ca15336d0b10445b4af4775285b88b4'),
+            'src/MimicParty.InteropBootstrap/Bootstrap.cs':('c6984654398c69f4161cfe7b7fb36c1af09f7091','4e5548a63dd69b866c5cf592ab83c5102b6ccccd'),
+            'src/MimicParty.InteropBootstrap/MetadataRepair.cs':('c6984654398c69f4161cfe7b7fb36c1af09f7091','d2284974cb4de98a05e473569649d6a2335fcfdb'),
+            'src/MimicParty.InteropBootstrap/MimicParty.InteropBootstrap.csproj':('c6984654398c69f4161cfe7b7fb36c1af09f7091','8ae337a342cfc57da340d09310506344585cdfa8')}
+          for name,(revision,expected) in items.items():
+              with urlopen('https://raw.githubusercontent.com/LocoPablito/MimicParty-Modding/'+revision+'/'+name,timeout=90) as response: data=response.read()
+              digest=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+              if digest!=expected: raise ValueError('Source blob mismatch: '+name)
+              path=Path(name);path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data)
+          Path('.github/workflows/import-components.yml').unlink()
+      - name: Commit imported sources and start publication
+        run: |
+          git config user.name arribbaa
+          git config user.email 315126767+LocoPablito@users.noreply.github.com
+          git add -A
+          git commit -m "Move pinned compatibility source into the dedicated Pack repository"
+          git push origin HEAD:main
+          gh workflow run release.yml --repo "$GITHUB_REPOSITORY" --ref main

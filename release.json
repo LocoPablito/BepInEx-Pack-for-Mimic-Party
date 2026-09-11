@@ -1,0 +1,11 @@
+{
+  "Author":"arribbaa","Component":"pack","Version":"1.0.0","Revision":2,"Tag":"v1.0.0-r2",
+  "Nexus":{"core":"https://www.nexusmods.com/mimicparty/mods/2","expansion":"https://www.nexusmods.com/mimicparty/mods/1","pack":"https://www.nexusmods.com/mimicparty/mods/3"},
+  "Repositories":{"core":"https://github.com/LocoPablito/MimicParty-Modding","expansion":"https://github.com/LocoPablito/Mimic-Party-10-Player-Expansion","pack":"https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party"},
+  "BinaryVersions":{"Bootstrap":"1.0.0","BepInEx":"6.0.0-be.788"},
+  "BinarySHA256":{"Bootstrap":"5e8408516988c28bd5e0f54d859877dc0939ce5e0a0d6bbae2e3b33c33e82f01"},
+  "Inputs":{
+    "Pack":{"File":"BepInEx_Pack_for_Mimic_Party_v1.0.0.zip","URL":"https://github.com/LocoPablito/MimicParty-Modding/releases/download/bepinex-pack-v1.0.0/BepInEx_Pack_for_Mimic_Party_v1.0.0.zip","SHA256":"84a3a5ca68020ca6ce43e438df2f32a2bbdda6e4577f593076bb392e3923ee12"},
+    "Sources":{"File":"BepInEx_Pack_for_Mimic_Party_v1.0.0_SOURCES.zip","URL":"https://github.com/LocoPablito/MimicParty-Modding/releases/download/bepinex-pack-v1.0.0/BepInEx_Pack_for_Mimic_Party_v1.0.0_SOURCES.zip","SHA256":"d74409e85c392e9b8bda647d18c512c4224e60e0f6ddc156460fab2cb14d8203"}
+  }
+}
