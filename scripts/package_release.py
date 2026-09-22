@@ -1,4 +1,4 @@
-"""Repackage pinned public binaries with component-specific documentation."""
+"""Repackage pinned public BepInEx bytes with the current Mimic Party bootstrap and documentation."""
 from pathlib import Path, PurePosixPath
 from urllib.request import Request, urlopen
 import hashlib
@@ -77,7 +77,7 @@ def write_archive(filename, files, manifest_path):
     path = OUT / filename
     with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, data in sorted(files.items()):
-            info = zipfile.ZipInfo(name, (2026, 9, 11, 0, 0, 0))
+            info = zipfile.ZipInfo(name, (2026, 9, 22, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, data)
@@ -97,7 +97,7 @@ version = CFG['Version']
 revision = 'R' + str(CFG['Revision'])
 provenance = {k: CFG[k] for k in ['Author', 'Component', 'Version', 'Revision', 'BinaryVersions', 'BinarySHA256']}
 provenance['SourceInputs'] = CFG['Inputs']
-provenance['RuntimeRecompiled'] = False
+provenance['RuntimeRecompiled'] = role == 'pack'
 provenance['ReleaseRepository'] = CFG['Repositories'][role]
 provenance['NexusPage'] = CFG['Nexus'][role]
 provenance['FreshAutomaticInstallConfirmed'] = False
@@ -130,7 +130,17 @@ elif role == 'pack':
     prefix = 'BepInExPack/'
     files = get_input('Pack')
     sources = get_input('Sources')
-    require_dll(files, 'BepInEx/patchers/MimicParty.InteropBootstrap.dll', 'Bootstrap')
+    bootstrap_name = 'BepInEx/patchers/MimicParty.InteropBootstrap.dll'
+    base_bootstrap_sha = '5e8408516988c28bd5e0f54d859877dc0939ce5e0a0d6bbae2e3b33c33e82f01'
+    if SHA(files[bootstrap_name]) != base_bootstrap_sha:
+        raise ValueError('Unexpected bootstrap in pinned base Pack input')
+    compiled_bootstrap = ROOT / 'src' / 'MimicParty.InteropBootstrap' / 'bin' / 'Release' / 'net6.0' / 'MimicParty.InteropBootstrap.dll'
+    if not compiled_bootstrap.is_file():
+        raise ValueError('Compiled Bootstrap 1.0.1 was not found; run build.ps1 first')
+    compiled_bytes = compiled_bootstrap.read_bytes()
+    if SHA(compiled_bytes) != CFG['BinarySHA256']['Bootstrap']:
+        raise ValueError('Compiled Bootstrap identity mismatch')
+    files[bootstrap_name] = compiled_bytes
     lines = files[prefix + 'UPSTREAM_SHA256SUMS.txt'].decode('utf-8').splitlines()
     if len(lines) != 228:
         raise ValueError('Unexpected upstream file count')
@@ -157,7 +167,29 @@ elif role == 'pack':
     provenance['UpstreamFilesPreserved'] = 228
     provenance['Requirements'] = {}
     files[prefix + 'PROVENANCE.json'] = JSON(provenance)
-    sources['README_R2.md'] = ('# Corresponding source\n\nPack by arribbaa. Source/download location: ' + new_url + '\n\nDo not install this archive in the game folder. It preserves the upstream source and license material from the pinned original source archive; revision R2 changes distribution links only.\n').encode()
+    for name in list(sources):
+        folded = name.replace('\\', '/').casefold()
+        if 'mimicparty.interopbootstrap' in folded or 'mimicparty_interopbootstrap' in folded:
+            sources.pop(name)
+    source_root = ROOT / 'src' / 'MimicParty.InteropBootstrap'
+    for source_path in sorted(source_root.rglob('*')):
+        if not source_path.is_file() or 'bin' in source_path.parts or 'obj' in source_path.parts:
+            continue
+        if source_path.suffix.lower() not in {'.cs', '.csproj'}:
+            continue
+        rel = source_path.relative_to(source_root).as_posix()
+        sources['arribbaa/MimicParty.InteropBootstrap/' + rel] = source_path.read_bytes()
+    for source_name in ['Directory.Build.props', 'build.ps1']:
+        source_path = ROOT / source_name
+        if source_path.is_file():
+            sources['arribbaa/' + source_name] = source_path.read_bytes()
+    sources['README_ARRIBBAA_SOURCE.md'] = (
+        '# Corresponding source for BepInEx Pack 1.0.1\n\n'
+        'Runtime/download location: ' + new_url + '\n\n'
+        'The pinned upstream BepInEx source/license material is preserved from the Pack 1.0.0 source input. '
+        'The arribbaa/MimicParty.InteropBootstrap directory contains the exact current Bootstrap 1.0.1 source. '
+        'Do not install this SOURCES archive into the game folder.\n'
+    ).encode('utf-8')
     outputs.append(write_archive(f'BepInEx_Pack_for_Mimic_Party_v{version}_{revision}.zip', files, prefix + 'SHA256SUMS.txt'))
     outputs.append(write_archive(f'BepInEx_Pack_for_Mimic_Party_v{version}_{revision}_SOURCES.zip', sources, 'SHA256SUMS.txt'))
 else:
