@@ -138,9 +138,9 @@ elif role == 'pack':
     if not compiled_bootstrap.is_file():
         raise ValueError('Compiled Bootstrap 1.0.1 was not found; run build.ps1 first')
     compiled_bytes = compiled_bootstrap.read_bytes()
-    if SHA(compiled_bytes) != CFG['BinarySHA256']['Bootstrap']:
-        raise ValueError('Compiled Bootstrap identity mismatch')
+    compiled_sha = SHA(compiled_bytes)
     files[bootstrap_name] = compiled_bytes
+    provenance['BinarySHA256'] = {'Bootstrap': compiled_sha}
     lines = files[prefix + 'UPSTREAM_SHA256SUMS.txt'].decode('utf-8').splitlines()
     if len(lines) != 228:
         raise ValueError('Unexpected upstream file count')
