@@ -1,0 +1,31 @@
+name: v0.2.3 compatibility build
+on:
+  push:
+    branches: ['release/v0.2.3-compat']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.425'
+      - name: Compile bootstrap
+        shell: pwsh
+        run: ./build.ps1
+      - name: Stage compatibility binary
+        shell: pwsh
+        run: |
+          $dll = 'src/MimicParty.InteropBootstrap/bin/Release/net6.0/MimicParty.InteropBootstrap.dll'
+          if (!(Test-Path $dll)) { throw 'Bootstrap DLL missing after build' }
+          New-Item -ItemType Directory -Force compat-dist | Out-Null
+          Copy-Item $dll compat-dist/
+          $hash = (Get-FileHash $dll -Algorithm SHA256).Hash.ToLowerInvariant()
+          "MimicParty.InteropBootstrap.dll $hash" | Tee-Object -FilePath compat-dist/SHA256.txt
+      - uses: actions/upload-artifact@v6
+        with:
+          name: bep-in-ex-v023-bootstrap
+          path: compat-dist/
+          retention-days: 14
