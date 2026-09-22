@@ -1,31 +1,30 @@
-name: v0.2.3 compatibility build
+name: v0.2.3 compatibility package
 on:
   push:
     branches: ['release/v0.2.3-compat']
 permissions:
   contents: read
 jobs:
-  build:
+  package:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.425'
-      - name: Compile bootstrap
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Compile Bootstrap 1.0.1
         shell: pwsh
         run: ./build.ps1
-      - name: Stage compatibility binary
+      - name: Assemble Pack 1.0.1 R1 candidate
         shell: pwsh
         run: |
-          $dll = 'src/MimicParty.InteropBootstrap/bin/Release/net6.0/MimicParty.InteropBootstrap.dll'
-          if (!(Test-Path $dll)) { throw 'Bootstrap DLL missing after build' }
-          New-Item -ItemType Directory -Force compat-dist | Out-Null
-          Copy-Item $dll compat-dist/
-          $hash = (Get-FileHash $dll -Algorithm SHA256).Hash.ToLowerInvariant()
-          "MimicParty.InteropBootstrap.dll $hash" | Tee-Object -FilePath compat-dist/SHA256.txt
+          python scripts/package_release.py
+          if ($LASTEXITCODE -ne 0) { throw 'Archive verification failed' }
       - uses: actions/upload-artifact@v6
         with:
-          name: bep-in-ex-v023-bootstrap
-          path: compat-dist/
+          name: bepinex-pack-v101-r1-candidate
+          path: dist/
           retention-days: 14
