@@ -4,7 +4,7 @@ using BepInEx.Preloader.Core.Patching;
 
 namespace Arribbaa.MimicParty.InteropBootstrap;
 
-[PatcherPluginInfo("com.arribbaa.mimicparty.interopbootstrap", "Mimic Party Interop Bootstrap", "1.0.1")]
+[PatcherPluginInfo("com.arribbaa.mimicparty.interopbootstrap", "Mimic Party Interop Bootstrap", "1.0.2")]
 public sealed class Bootstrap : BasePatcher
 {
     private const string V0173GameHash = "44bbc82bdae73c1c86559a1f091ee9c7a3ae510a02c2d83f16b686ecdd9c8b11";
@@ -13,9 +13,9 @@ public sealed class Bootstrap : BasePatcher
     private const string V023GameHash = "adc318d8ad108a2eac4e130421d20c21aef840d8ec44203fba667d6eef08e199";
     private const string V023MetadataHash = "96b52e058bbf5ea2a5218a2a6c01a9391c72eda9432b640bbdce8d2c10060405";
 
-    // In #788 constructors run after interop generation and BEFORE
-    // LoadAssemblyDirectories opens generated DLLs. Initialize is too late for
-    // transactional disk replacement on Windows. This ordering is intentional.
+    private const string V0233GameHash = "03757842d82c83534a686b0acbf247c9a5b76d0a15c74c7cb27458e731d4b9d4";
+    private const string V0233MetadataHash = "7f4b0ab25b7ba8ee05d9abebd507d3e2af29bd94c5ae48f4daadc2ddedc8bbf2";
+
     public Bootstrap()
     {
         try
@@ -54,6 +54,12 @@ public sealed class Bootstrap : BasePatcher
             {
                 profileName = "Mimic Party v0.2.3 / Sep 22";
                 layout = MetadataRepair.V023Layout;
+            }
+            else if (string.Equals(gameHash, V0233GameHash, StringComparison.OrdinalIgnoreCase) &&
+                     string.Equals(metadataHash, V0233MetadataHash, StringComparison.OrdinalIgnoreCase))
+            {
+                profileName = "Mimic Party v0.2.33 / Sep 22";
+                layout = MetadataRepair.V0233Layout;
             }
             else
             {
