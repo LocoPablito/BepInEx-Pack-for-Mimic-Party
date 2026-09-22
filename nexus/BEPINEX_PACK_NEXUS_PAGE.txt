@@ -1,30 +1,38 @@
 [size=5][b]BepInEx Pack for Mimic Party[/b][/size]
-[b]Pack 1.0.1 · configured and maintained by arribbaa[/b]
+[b]Pack 1.0.2 · configured and maintained by arribbaa[/b]
 
 Original loader: BepInEx team and contributors.
-BepInEx 6.0.0-be.788, Unity IL2CPP Windows x64, with Mimic Party Interop Bootstrap 1.0.1, hidden-console preset and disk logging. All 228 original upstream BepInEx files remain byte-for-byte unchanged.
+BepInEx 6.0.0-be.788, Unity IL2CPP Windows x64, with Mimic Party Interop Bootstrap 1.0.2, hidden-console preset and disk logging. All 228 original upstream BepInEx files remain byte-for-byte unchanged.
 
 [size=4][b]Supported builds[/b][/size]
-Pack 1.0.1 explicitly supports the captured Mimic Party Windows / Steam fingerprints for v0.1.73 (11 September 2026) and v0.2.3 (22 September 2026). Unknown fingerprints are rejected without modifying generated interop files.
+Pack 1.0.2 explicitly supports the captured Windows / Steam fingerprints for:
+[list]
+[*]Mimic Party v0.1.73 — captured 11 September 2026
+[*]Mimic Party v0.2.3 — captured 22 September 2026
+[*]Mimic Party v0.2.33 — captured 22 September 2026
+[/list]
+Unknown fingerprints are rejected without modifying generated interop files.
 [url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/COMPATIBILITY.md]Exact hashes and verification details[/url]
 
 [size=4][b]Installation / update[/b][/size]
 1. Close the game and use Steam > Manage > Browse local files.
 2. Extract the runtime Pack ZIP into the folder containing Mimic Party.exe.
-3. Updating from 1.0.0: allow replacement of BepInEx/patchers/MimicParty.InteropBootstrap.dll.
+3. Updating from 1.0.0 or 1.0.1: allow replacement of BepInEx/patchers/MimicParty.InteropBootstrap.dll.
 4. Install [url=https://www.nexusmods.com/mimicparty/mods/2]Modding Core[/url] only when your chosen feature mod requires it, then the feature mod.
 5. Launch normally through Steam and allow interop regeneration to finish when the game changed.
 
-[size=4][b]What 1.0.1 fixes[/b][/size]
-Mimic Party v0.2.3 changed GameAssembly.dll and global-metadata.dat. Bootstrap 1.0.0 rejected the new fingerprint, leaving duplicate empty helper names in the locally generated UnityEngine.CoreModule.dll; the IL2CPP chainloader then stopped before normal plugins loaded.
+[size=4][b]What 1.0.2 fixes[/b][/size]
+Mimic Party v0.2.33 changed GameAssembly.dll and global-metadata.dat again. Pack 1.0.1 correctly rejected the unknown fingerprint, which meant the generated CoreModule compatibility repair was not allowed to run and the IL2CPP chainloader could not load normal plugins.
 
-Bootstrap 1.0.1 adds the exact verified v0.2.3 fingerprint and generated-CoreModule layout. It remains fail-closed: both fingerprint and structural checks must match before the three known duplicate TypeDef names are repaired. No native game file is modified.
+Bootstrap 1.0.2 adds the exact captured v0.2.33 fingerprint plus the independently verified generated-CoreModule layout. It remains fail-closed: both the fingerprint and structural checks must match before the three known duplicate TypeDef names are repaired. No native game binary is modified.
+
+The v0.2.33 live acceptance test passed: Bootstrap 1.0.2 reported compatibility ready, and the normal IL2CPP plugin chain loaded successfully.
 
 [size=4][b]Logging[/b][/size]
 Disk log: BepInEx/LogOutput.log. Console remains hidden by default.
 
 [size=4][b]Sources and support[/b][/size]
-The SOURCES download is for review/rebuilding, not installation. It preserves pinned upstream source/license material and includes the exact Bootstrap 1.0.1 source.
+The SOURCES download is for review/rebuilding, not installation. It preserves pinned upstream source/license material and includes the exact Bootstrap 1.0.2 source.
 [url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party]Source and releases[/url]
 [url=https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/issues]Report an issue[/url]
 

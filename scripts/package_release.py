@@ -101,6 +101,23 @@ provenance['RuntimeRecompiled'] = role == 'pack'
 provenance['ReleaseRepository'] = CFG['Repositories'][role]
 provenance['NexusPage'] = CFG['Nexus'][role]
 provenance['FreshAutomaticInstallConfirmed'] = False
+provenance['SupportedGameProfiles'] = [
+    {
+        'Label': 'v0.1.73 / Sep 11',
+        'GameAssemblySHA256': '44bbc82bdae73c1c86559a1f091ee9c7a3ae510a02c2d83f16b686ecdd9c8b11',
+        'MetadataSHA256': '1586b9dd69e488706671d35490cc16377a612ca3af521031ac44464929b21e94'
+    },
+    {
+        'Label': 'v0.2.3 / Sep 22',
+        'GameAssemblySHA256': 'adc318d8ad108a2eac4e130421d20c21aef840d8ec44203fba667d6eef08e199',
+        'MetadataSHA256': '96b52e058bbf5ea2a5218a2a6c01a9391c72eda9432b640bbdce8d2c10060405'
+    },
+    {
+        'Label': 'v0.2.33 / Sep 22',
+        'GameAssemblySHA256': '03757842d82c83534a686b0acbf247c9a5b76d0a15c74c7cb27458e731d4b9d4',
+        'MetadataSHA256': '7f4b0ab25b7ba8ee05d9abebd507d3e2af29bd94c5ae48f4daadc2ddedc8bbf2'
+    }
+]
 outputs = []
 
 if role == 'core':
@@ -184,10 +201,10 @@ elif role == 'pack':
         if source_path.is_file():
             sources['arribbaa/' + source_name] = source_path.read_bytes()
     sources['README_ARRIBBAA_SOURCE.md'] = (
-        '# Corresponding source for BepInEx Pack 1.0.1\n\n'
+        f'# Corresponding source for BepInEx Pack {version}\n\n'
         'Runtime/download location: ' + new_url + '\n\n'
         'The pinned upstream BepInEx source/license material is preserved from the Pack 1.0.0 source input. '
-        'The arribbaa/MimicParty.InteropBootstrap directory contains the exact current Bootstrap 1.0.1 source. '
+        f"The arribbaa/MimicParty.InteropBootstrap directory contains the exact current Bootstrap {CFG['BinaryVersions']['Bootstrap']} source. "
         'Do not install this SOURCES archive into the game folder.\n'
     ).encode('utf-8')
     outputs.append(write_archive(f'BepInEx_Pack_for_Mimic_Party_v{version}_{revision}.zip', files, prefix + 'SHA256SUMS.txt'))

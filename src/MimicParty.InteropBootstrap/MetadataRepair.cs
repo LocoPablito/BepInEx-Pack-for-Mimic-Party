@@ -6,8 +6,6 @@ using System.Security.Cryptography;
 
 namespace Arribbaa.MimicParty.InteropBootstrap;
 
-// Only the Name columns of three empty duplicate TypeDef rows are changed.
-// Existing string-heap suffixes keep all tokens, offsets, signatures and IL intact.
 public static class MetadataRepair
 {
     public sealed record Result(byte[] Bytes, int RenamedTypes);
@@ -24,10 +22,12 @@ public static class MetadataRepair
     public static readonly CapturedLayout V023Layout =
         new(4033, 22565, 14629, new[] { 0x322, 0x3c3, 0x3e3 });
 
+    public static readonly CapturedLayout V0233Layout =
+        new(4026, 22552, 14635, new[] { 0x324, 0x3c4, 0x3e4 });
+
     public static string Sha256(byte[] bytes) =>
         Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 
-    // Kept for source/API compatibility with the 1.0.0 bootstrap tests and tooling.
     public static Result Prepare(byte[] input, bool requireCapturedLayout = true) =>
         Prepare(input, requireCapturedLayout ? V0173Layout : null);
 
@@ -180,7 +180,6 @@ public static class MetadataRepair
         return new Result(output, plan.Count);
     }
 
-    // Kept for source/API compatibility with the 1.0.0 bootstrap tests and tooling.
     public static Result RepairFile(string path, bool requireCapturedLayout = true) =>
         RepairFile(path, requireCapturedLayout ? V0173Layout : null);
 
