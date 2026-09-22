@@ -18,9 +18,7 @@
     "Bootstrap": "1.0.1",
     "BepInEx": "6.0.0-be.788"
   },
-  "BinarySHA256": {
-    "Bootstrap": "86773ea30c38662715173e230353554fee6e7196e687d20fe72cd310bcf5ec5c"
-  },
+  "BinarySHA256": {},
   "Inputs": {
     "Pack": {
       "File": "BepInEx_Pack_for_Mimic_Party_v1.0.0.zip",
