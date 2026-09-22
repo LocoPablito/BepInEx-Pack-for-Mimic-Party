@@ -1,0 +1,30 @@
+name: v0.2.33 compatibility candidate
+on:
+  push:
+    branches: ['release/v0.2.33-compat']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.425'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Compile Bootstrap 1.0.2
+        shell: pwsh
+        run: ./build.ps1
+      - name: Package candidate
+        shell: pwsh
+        run: |
+          python scripts/package_release.py
+          if ($LASTEXITCODE -ne 0) { throw 'Pack candidate packaging failed' }
+      - uses: actions/upload-artifact@v6
+        with:
+          name: bepinex-pack-v102-r1-v0233
+          path: dist/
+          retention-days: 14
