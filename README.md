@@ -1,29 +1,27 @@
 # BepInEx Pack for Mimic Party
 
-**Pack 1.0.1 · configuration and maintenance by arribbaa**
+**Pack 1.0.2 · configuration and maintenance by arribbaa**
 
-Original loader: **BepInEx team and contributors**. A Mimic Party-specific distribution of BepInEx **6.0.0-be.788**, Unity IL2CPP, Windows x64, with Interop Bootstrap **1.0.1**, a hidden-console preset and disk logging.
+Mimic Party-specific BepInEx 6.0.0-be.788 IL2CPP x64 distribution with Interop Bootstrap **1.0.2**.
 
-[Download on Nexus](https://www.nexusmods.com/mimicparty/mods/3) · [GitHub downloads](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/releases/latest) · [Report an issue](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/issues)
+## Supported captured builds
 
-## What is included
+- v0.1.73
+- v0.2.3
+- **v0.2.33** (22 September 2026)
 
-All **228 original upstream BepInEx files** remain byte-for-byte unchanged. Pack 1.0.1 updates only the Mimic Party-specific Interop Bootstrap and Pack documentation/source bundle. License notices, corresponding source access and hashes are supplied.
+Unknown GameAssembly/metadata pairs remain fail-closed.
 
-**No separate BepInEx download is needed.** The pack does **not** include Modding Core or the 10 Player Expansion and does not alter lobby capacity on its own.
+## v0.2.33
 
-## Supported game fingerprints
+GameAssembly:
+`03757842d82c83534a686b0acbf247c9a5b76d0a15c74c7cb27458e731d4b9d4`
 
-Bootstrap 1.0.1 is fail-closed and explicitly recognizes the captured Windows / Steam fingerprints for Mimic Party **v0.1.73** (11 September 2026) and **v0.2.3** (22 September 2026). Unknown GameAssembly/metadata combinations are rejected without modifying generated interop files.
+Metadata:
+`7f4b0ab25b7ba8ee05d9abebd507d3e2af29bd94c5ae48f4daadc2ddedc8bbf2`
 
-## Install / update
+The generated CoreModule changed again. Bootstrap 1.0.2 adds the separately captured structural profile and keeps the repair limited to the three verified empty duplicate helper TypeDef name entries.
 
-1. Close Mimic Party and open Steam → Manage → Browse local files.
-2. Extract the runtime Pack ZIP into the folder containing `Mimic Party.exe`.
-3. When updating from Pack 1.0.0, allow replacement of `BepInEx/patchers/MimicParty.InteropBootstrap.dll`.
-4. Install the Core if your chosen mod requires it, then the feature mod.
-5. Start normally through Steam. If the game fingerprint changed, allow BepInEx interop regeneration to finish.
+Install into the folder containing `Mimic Party.exe`; when updating, replace `BepInEx/patchers/MimicParty.InteropBootstrap.dll`.
 
-The bootstrap validates both the captured game fingerprint and the generated CoreModule metadata layout before touching the local interop DLL. It renames only the three recognized empty duplicate helper TypeDefs, preserves an original backup and verifies the result. No native game binary is modified.
-
-[Compatibility](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/COMPATIBILITY.md) · [Changelog](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/CHANGELOG.md) · [Build instructions](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/BUILDING.md) · [Licenses](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/LICENSE.txt) · [Security](https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party/blob/main/SECURITY.md)
+[Compatibility](COMPATIBILITY.md) · [Changelog](CHANGELOG.md)
