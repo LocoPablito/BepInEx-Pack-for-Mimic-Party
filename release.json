@@ -1,9 +1,9 @@
 {
   "Author": "arribbaa",
   "Component": "pack",
-  "Version": "1.0.0",
-  "Revision": 3,
-  "Tag": "v1.0.0-r3",
+  "Version": "1.0.1",
+  "Revision": 1,
+  "Tag": "v1.0.1-r1",
   "Nexus": {
     "core": "https://www.nexusmods.com/mimicparty/mods/2",
     "expansion": "https://www.nexusmods.com/mimicparty/mods/1",
@@ -15,12 +15,10 @@
     "pack": "https://github.com/LocoPablito/BepInEx-Pack-for-Mimic-Party"
   },
   "BinaryVersions": {
-    "Bootstrap": "1.0.0",
+    "Bootstrap": "1.0.1",
     "BepInEx": "6.0.0-be.788"
   },
-  "BinarySHA256": {
-    "Bootstrap": "5e8408516988c28bd5e0f54d859877dc0939ce5e0a0d6bbae2e3b33c33e82f01"
-  },
+  "BinarySHA256": {},
   "Inputs": {
     "Pack": {
       "File": "BepInEx_Pack_for_Mimic_Party_v1.0.0.zip",
